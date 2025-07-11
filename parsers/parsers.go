@@ -106,3 +106,8 @@ func ReadLine(reader io.Reader) ([]byte, error) {
 		}
 	}
 }
+
+func ReadLineString(reader io.Reader) (string, error) {
+	line, err := ReadLine(reader)
+	return string(line), err
+}

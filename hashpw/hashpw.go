@@ -91,7 +91,11 @@ func getOutFunc() func(w []byte) error {
 	if output != "" {
 		_, err = os.Stat(output)
 		if !errors.Is(err, os.ErrNotExist) {
-			fatal(errors.New("output file already exists: "+output), "invalid output")
+			fmt.Printf("output file already exists, do you want to overwrite it? (y/n) ")
+			line, _ := parsers.ReadLineString(os.Stdin)
+			if line == "y" {
+				fmt.Printf("\roverwriting: %s\n", output)
+			}
 		}
 		return func(w []byte) error {
 			f, e := os.Create(output)
