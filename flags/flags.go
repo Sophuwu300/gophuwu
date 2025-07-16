@@ -128,7 +128,7 @@ func ParseArgs() error {
 	var args []string
 	for i = 1; i < len(os.Args); i++ {
 		v = os.Args[i]
-		if (len(v) > 2 && v[0] == '-' && v[1] != '-') || (len(v) > 1 && v[0] == '-') {
+		if (len(v) > 2 && v[0] == '-' && v[1] != '-') || (len(v) == 2 && v[0] == '-') {
 			for j = 1; j < len(os.Args[i]); j++ {
 				vv = os.Args[i][j]
 				v, ok = shortFlags[vv]
