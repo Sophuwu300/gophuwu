@@ -2,9 +2,10 @@ package flags
 
 import (
 	"fmt"
-	"git.sophuwu.com/gophuwu/parsers"
 	"os"
 	"slices"
+
+	"git.sophuwu.com/gophuwu/parsers"
 )
 
 type flag struct {
@@ -166,6 +167,12 @@ func GetFloat64Flag(name string) (float64, error) {
 	return i.(float64), nil
 }
 
+var otherArgs []string
+
+func OtherArgs() []string {
+	return otherArgs
+}
+
 func ParseArgs() error {
 	if len(os.Args) < 2 {
 		return nil
@@ -229,6 +236,8 @@ func ParseArgs() error {
 			if err != nil {
 				return fmt.Errorf("error parsing flag %s: %v", f.Name, err)
 			}
+		} else {
+			otherArgs = append(otherArgs, args[i])
 		}
 	}
 	if ok, err = GetBoolFlag("help"); err != nil {
